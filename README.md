@@ -1,6 +1,9 @@
 # BrewBot
 A bot for Baldwin's Brew on Flight Rising.
 
+## What does it do?
+BrewBot automates the process of transmuting items in Baldwin's brew so that you don't have to waste time checking in all day.  It alternates transmuting items in each category of your hoard (Food, Materials, Apparel, Familars, Other), always selecting the first item listed.  Because of this, it is recommended that when using BrewBot you either keep a dedicated stack of brew items at the front of each hoard category, or put all items that you don't want to be brewed into your vault.
+
 ## Using BrewBot
 
 ### Downloading
@@ -49,3 +52,26 @@ I wouldn't recommend it.  Once rollover comes around, you will be automatically 
 ### Does BrewBot always brew immediately after the last item is done?  Isn't that suspicious?
 Once BrewBot puts an item into Baldwin's Brew, it waits anywhere between 32 - 45 minutes before trying again.  This random timer allows BrewBot to appear like a real person who just happens to check in a lot!  Mouse clicks are also randomly timed--they will never spam requests to the site, and always maintain a human-like delay.
 
+### I don't want to move all of my items into my vault.  Which items will sit at the front of my hoard so that I don't need to worry about BrewBot melting my important stuff?
+Currently, items in your hoard are listed in the order they were created on the site.  So older items are toward the front, and newer items are toward the back.  If you don't want to move all of your items into your vault to protect them from BrewBot, you can keep a stack or two of older items at the front of each of your hoard categories for BrewBot to use.  Here are some older items from each category that will sit at or near the front of your hoard:
+
+Food
+* Hardshell
+* Tuxedo Urchin
+* Nebula Floaters
+
+Materials
+* Clay
+* Shale
+
+Apparel
+* Gray Wizard Hat
+* Brown Wizard Hat
+* Black Fedora
+
+Familiars
+* Luna Mith
+* Leafy Moth
+* Cockatrice
+
+Keeping a decent stock of these items should prevent you from having to move your entire inventory to the vault.
