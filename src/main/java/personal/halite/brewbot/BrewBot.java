@@ -56,7 +56,7 @@ public class BrewBot {
         TRANSMUTE_Y = getTransmuteY();
 
         if(TRANSMUTE_X == 0 || TRANSMUTE_Y == 0){
-            logger.error("Screen resolution {} x {} not supported.  Please check the README for supported resolutions.");
+            logger.error("Screen resolution {} x {} not supported.  Please check the README for supported resolutions.", SCREEN_HEIGHT, SCREEN_WIDTH);
             System.exit(0);
         }
 
