@@ -55,6 +55,11 @@ public class BrewBot {
         TRANSMUTE_X = getTransmuteX();
         TRANSMUTE_Y = getTransmuteY();
 
+        if(TRANSMUTE_X == 0 || TRANSMUTE_Y == 0){
+            logger.error("Screen resolution {} x {} not supported.  Please check the README for supported resolutions.");
+            System.exit(0);
+        }
+
         int y = getTabsY(); // All labels are on the same y coordinate
 
         // Set coordinates for materials tab
