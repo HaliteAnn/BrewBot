@@ -6,7 +6,7 @@
 
     <groupId>personal.halite</groupId>
     <artifactId>BrewBot</artifactId>
-    <version>0.0.2</version>
+    <version>0.1.0</version>
 
     <build>
         <plugins>
@@ -22,5 +22,13 @@
             </plugin>
         </plugins>
     </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+    </dependencies>
 
 </project>

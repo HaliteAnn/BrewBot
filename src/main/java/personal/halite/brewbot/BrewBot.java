@@ -1,9 +1,11 @@
 package personal.halite.brewbot;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.awt.*;
 import java.awt.event.InputEvent;
 import java.util.Random;
-import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -16,6 +18,8 @@ import java.util.concurrent.TimeUnit;
  *     - 1920 x 1080
  */
 public class BrewBot {
+
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final int SCREEN_HEIGHT;
     private final int SCREEN_WIDTH;
@@ -45,6 +49,7 @@ public class BrewBot {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         SCREEN_HEIGHT = screenSize.height;
         SCREEN_WIDTH = screenSize.width;
+        logger.info("Screen resolution detected as {} x {}.", SCREEN_HEIGHT, SCREEN_WIDTH);
 
         // Set coordinates for Transmute button
         TRANSMUTE_X = getTransmuteX();
@@ -205,19 +210,26 @@ public class BrewBot {
 
     private void go() throws AWTException, InterruptedException {
 
+        logger.info("Starting BrewBot.");
+
         Robot robot = new Robot();
 
         while(true){
 
             brewFood(robot);
+            logger.info("Added FOOD to Baldwin's Brew.");
             watchPaintDry();
             brew(robot, MATERIALS_X, MATERIALS_Y);
+            logger.info("Added MATERIAL to Baldwin's Brew.");
             watchPaintDry();
             brew(robot, APPAREL_X, APPAREL_Y);
+            logger.info("Added APPAREL to Baldwin's Brew.");
             watchPaintDry();
             brew(robot, FAMILIARS_X, FAMILIARS_Y);
+            logger.info("Added FAMILIAR to Baldwin's Brew.");
             watchPaintDry();
             brew(robot, OTHER_X, OTHER_Y);
+            logger.info("Added TRINKET to Baldwin's Brew.");
             watchPaintDry();
 
         }
@@ -226,66 +238,38 @@ public class BrewBot {
 
     private void watchPaintDry() throws InterruptedException {
         Random random = new Random();
-        TimeUnit.MINUTES.sleep(random.longs(32, 45).findFirst().getAsLong());
+        long randomNumber = random.longs(32, 45).findFirst().getAsLong();
+        logger.info("Waiting {} minutes before brewing again.", randomNumber);
+        TimeUnit.MINUTES.sleep(randomNumber);
     }
 
     private void brewFood(Robot robot){
-        clickTransmute(robot);
-        clickItem(robot);                                    // No need to select tab, already on food tab
-        clickAdd(robot);
-        clickConfirm(robot);
-        clickCollect(robot);
+        clickButton(robot, TRANSMUTE_X, TRANSMUTE_Y);
+        clickButton(robot, ITEM_X, ITEM_Y);
+        clickButton(robot, ADD_X, ADD_Y);
+        clickButton(robot, CONFIRM_X, CONFIRM_Y);
+        clickButton(robot, COLLECT_X, COLLECT_Y);
     }
 
     private void brew(Robot robot, int x, int y){
-        clickTransmute(robot);
+        clickButton(robot, TRANSMUTE_X, TRANSMUTE_Y);
         robot.delay((int)(Math.random() * 10000) + 1);    // Wait for up to 10 seconds
         robot.mouseMove(x ,y);                               // Move mouse to desired tab
-        robot.delay((int)(Math.random() * 10000) + 1);    // Wait for up to 10 seconds
         click(robot);                                        // Click tab
-        clickItem(robot);
-        clickAdd(robot);
-        clickConfirm(robot);
-        clickCollect(robot);
+        clickButton(robot, ITEM_X, ITEM_Y);
+        clickButton(robot, ADD_X, ADD_Y);
+        clickButton(robot, CONFIRM_X, CONFIRM_Y);
+        clickButton(robot, COLLECT_X, COLLECT_Y);
     }
 
-    private void clickTransmute(Robot robot){
-        robot.delay((int)(Math.random() * 10000) + 1);    // Wait for up to 10 seconds
-        robot.mouseMove(TRANSMUTE_X, TRANSMUTE_Y);           // Move mouse to Transmute button
-        robot.delay((int)(Math.random() * 10000) + 1);    // Wait for up to 10 seconds
-        click(robot);
-    }
-
-    private void clickAdd(Robot robot){
-        robot.delay((int)(Math.random() * 10000) + 1);    // Wait for up to 10 seconds
-        robot.mouseMove(ADD_X, ADD_Y);                       // Move mouse to Add button
-        robot.delay((int)(Math.random() * 10000) + 1);    // Wait for up to 10 seconds
-        click(robot);
-    }
-
-    private void clickItem(Robot robot){
-        robot.delay((int)(Math.random() * 10000) + 1);    // Wait for up to 10 seconds
-        robot.mouseMove(ITEM_X,ITEM_Y);                      // Move mouse to first item in hoars
-        robot.delay((int)(Math.random() * 10000) + 1);    // Wait for up to 10 seconds
-        click(robot);
-    }
-
-    private void clickConfirm(Robot robot){
-        robot.delay((int)(Math.random() * 10000) + 1);    // Wait for up to 10 seconds
-        robot.mouseMove(CONFIRM_X, CONFIRM_Y);               // Move mouse to Transmute button
-        robot.delay((int)(Math.random() * 10000) + 1);    // Wait for up to 10 seconds
-        click(robot);
-    }
-
-    private void clickCollect(Robot robot){
-        robot.delay((int)(Math.random() * 10000) + 1);    // Wait for up to 10 seconds
-        robot.mouseMove(COLLECT_X, COLLECT_Y);               // Move mouse to Collect button
-        robot.delay((int)(Math.random() * 10000) + 1);    // Wait for up to 10 seconds
-        click(robot);
+    private void clickButton(Robot robot, int x, int y){
+        robot.delay((int)(Math.random() * 6000) + 1);     // Wait for up to 6 seconds
+        robot.mouseMove(x, y);                               // Move mouse to button
+        click(robot);                                        // Click
     }
 
     private void click(Robot robot){
-        robot.delay((int)(Math.random() * 10000) + 1);    // Wait for up to 10 seconds
+        robot.delay((int)(Math.random() * 4000) + 1);     // Wait for up to 4 seconds
         robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);      // Press the main mouse button
         robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);    // Release the main mouse button
     }
@@ -297,8 +281,6 @@ public class BrewBot {
      */
 
     public static void main(String[] args){
-
-        System.out.println("Starting BrewBot.");
 
         BrewBot bot = new BrewBot();
 
