@@ -3,6 +3,7 @@ package personal.halite.brewbot;
 import java.awt.*;
 import java.awt.event.InputEvent;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -32,6 +33,8 @@ public class BrewBot {
     private final int ITEM_Y;
     private final int ADD_X;
     private final int ADD_Y;
+    private final int CONFIRM_X;
+    private final int CONFIRM_Y;
 
 
     public BrewBot(){
@@ -70,6 +73,10 @@ public class BrewBot {
         // Set coordinates for Add button
         ADD_X = getAddX();
         ADD_Y = getAddY();
+
+        // Set coordinates for confirmation button
+        CONFIRM_X = getConfirmX();
+        CONFIRM_Y = getConfirmY();
 
     }
 
@@ -156,6 +163,20 @@ public class BrewBot {
         return 0;
     }
 
+    private int getConfirmX(){
+        if(SCREEN_WIDTH == 1920 && SCREEN_HEIGHT == 1080){
+            return 880;
+        }
+        return 0;
+    }
+
+    private int getConfirmY(){
+        if(SCREEN_WIDTH == 1920 && SCREEN_HEIGHT == 1080){
+            return 445;
+        }
+        return 0;
+    }
+
     /*
      *  ----------------------------
      *  Action methods
@@ -165,29 +186,36 @@ public class BrewBot {
     private void go() throws AWTException, InterruptedException {
 
         Robot robot = new Robot();
-        Random random = new Random();
+        Scanner scan = new Scanner(System.in);
+        String line = null;
 
-        while(true){
+        while((line = scan.nextLine( )).length( ) > 0){
 
             brewFood(robot);
-            TimeUnit.MINUTES.sleep(random.longs(32, 45).findFirst().getAsLong());
+            watchPaintDry();
             brew(robot, MATERIALS_X, MATERIALS_Y);
-            TimeUnit.MINUTES.sleep(random.longs(32, 45).findFirst().getAsLong());
+            watchPaintDry();
             brew(robot, APPAREL_X, APPAREL_Y);
-            TimeUnit.MINUTES.sleep(random.longs(32, 45).findFirst().getAsLong());
+            watchPaintDry();
             brew(robot, FAMILIARS_X, FAMILIARS_Y);
-            TimeUnit.MINUTES.sleep(random.longs(32, 45).findFirst().getAsLong());
+            watchPaintDry();
             brew(robot, OTHER_X, OTHER_Y);
-            TimeUnit.MINUTES.sleep(random.longs(32, 45).findFirst().getAsLong());
+            watchPaintDry();
 
         }
 
+    }
+
+    private void watchPaintDry() throws InterruptedException {
+        Random random = new Random();
+        TimeUnit.MINUTES.sleep(random.longs(32, 45).findFirst().getAsLong());
     }
 
     private void brewFood(Robot robot){
         clickTransmute(robot);
         clickItem(robot);                                    // No need to select tab, already on food tab
         clickAdd(robot);
+        clickConfirm(robot);
     }
 
     private void brew(Robot robot, int x, int y){
@@ -198,6 +226,7 @@ public class BrewBot {
         click(robot);                                        // Click tab
         clickItem(robot);
         clickAdd(robot);
+        clickConfirm(robot);
     }
 
     private void clickTransmute(Robot robot){
@@ -216,7 +245,14 @@ public class BrewBot {
 
     private void clickItem(Robot robot){
         robot.delay((int)(Math.random() * 10000) + 1);    // Wait for up to 10 seconds
-        robot.mouseMove(ITEM_X,ITEM_Y);                      // Food tab already selected, move straight to item
+        robot.mouseMove(ITEM_X,ITEM_Y);                      // Move mouse to first item in hoars
+        robot.delay((int)(Math.random() * 10000) + 1);    // Wait for up to 10 seconds
+        click(robot);
+    }
+
+    private void clickConfirm(Robot robot){
+        robot.delay((int)(Math.random() * 10000) + 1);    // Wait for up to 10 seconds
+        robot.mouseMove(CONFIRM_X, CONFIRM_Y);               // Move mouse to Transmute button
         robot.delay((int)(Math.random() * 10000) + 1);    // Wait for up to 10 seconds
         click(robot);
     }
