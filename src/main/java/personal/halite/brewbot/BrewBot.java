@@ -219,11 +219,12 @@ public class BrewBot {
 
         Robot robot = new Robot();
 
+        brewFirst(robot);
+        logger.info("Added FOOD to Baldwin's Brew.");
+        watchPaintDry();
+
         while(true){
 
-            brewFood(robot);
-            logger.info("Added FOOD to Baldwin's Brew.");
-            watchPaintDry();
             brew(robot, MATERIALS_X, MATERIALS_Y);
             logger.info("Added MATERIAL to Baldwin's Brew.");
             watchPaintDry();
@@ -235,6 +236,9 @@ public class BrewBot {
             watchPaintDry();
             brew(robot, OTHER_X, OTHER_Y);
             logger.info("Added TRINKET to Baldwin's Brew.");
+            watchPaintDry();
+            brewFood(robot);
+            logger.info("Added FOOD to Baldwin's Brew.");
             watchPaintDry();
 
         }
@@ -248,15 +252,20 @@ public class BrewBot {
         TimeUnit.MINUTES.sleep(randomNumber);
     }
 
-    private void brewFood(Robot robot){
+    private void brewFirst(Robot robot){                     // Brews the first item, doesn't collect first
         clickButton(robot, TRANSMUTE_X, TRANSMUTE_Y);
         clickButton(robot, ITEM_X, ITEM_Y);
         clickButton(robot, ADD_X, ADD_Y);
         clickButton(robot, CONFIRM_X, CONFIRM_Y);
-        clickButton(robot, COLLECT_X, COLLECT_Y);
     }
 
-    private void brew(Robot robot, int x, int y){
+    private void brewFood(Robot robot){                      // Brews food--no need to select category
+        clickButton(robot, COLLECT_X, COLLECT_Y);
+        brewFirst(robot);
+    }
+
+    private void brew(Robot robot, int x, int y){            // Brews all other item types
+        clickButton(robot, COLLECT_X, COLLECT_Y);
         clickButton(robot, TRANSMUTE_X, TRANSMUTE_Y);
         robot.delay((int)(Math.random() * 10000) + 1);       // Wait for up to 10 seconds
         robot.mouseMove(x ,y);                               // Move mouse to desired tab
@@ -264,7 +273,6 @@ public class BrewBot {
         clickButton(robot, ITEM_X, ITEM_Y);
         clickButton(robot, ADD_X, ADD_Y);
         clickButton(robot, CONFIRM_X, CONFIRM_Y);
-        clickButton(robot, COLLECT_X, COLLECT_Y);
     }
 
     private void clickButton(Robot robot, int x, int y){
