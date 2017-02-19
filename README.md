@@ -29,6 +29,8 @@ To run BrewBot, simply double-click on BrewBot.bat.  You can quit the applicatio
 ## Requirements
 BrewBot can only be run on Windows machines.
 
+Java must be updated to 1.8 or later.
+
 Only certain screen resolutions are supported.  I will continue to test and add more over time.  Please refer to the list below for currently supported dimensions.  You can check the resolution of your monitor in your display settings.
 
 ### Supported screen resolutions:
@@ -55,23 +57,29 @@ Once BrewBot puts an item into Baldwin's Brew, it waits anywhere between 32 - 45
 ### I don't want to move all of my items into my vault.  Which items will sit at the front of my hoard so that I don't need to worry about BrewBot melting my important stuff?
 Currently, items in your hoard are listed in the order they were created on the site.  So older items are toward the front, and newer items are toward the back.  If you don't want to move all of your items into your vault to protect them from BrewBot, you can keep a stack or two of older items at the front of each of your hoard categories for BrewBot to use.  Here are some older items from each category that will sit at or near the front of your hoard:
 
-Food
+**Food**
 * Hardshell
 * Tuxedo Urchin
 * Nebula Floaters
 
-Materials
+**Materials**
 * Clay
 * Shale
 
-Apparel
+**Apparel**
 * Gray Wizard Hat
 * Brown Wizard Hat
 * Black Fedora
 
-Familiars
+**Familiars**
 * Luna Mith
 * Leafy Moth
 * Cockatrice
 
-Keeping a decent stock of these items should prevent you from having to move your entire inventory to the vault.
+# Future Updates
+These are some features that I would like to implement in the future.  I may not get to them all, but this README will always stay updated with my most recent progress.  Feel free to make recommendations!
+* More compatible screen resolutions
+* Choice of which categories to brew in
+* Choice of which specific items to brew in each category
+* GUI so that non-tech-savvy users have easier access
+* Timer feature to automatically shut down the bot after X hours or brews.
