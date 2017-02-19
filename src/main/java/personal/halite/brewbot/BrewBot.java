@@ -186,10 +186,8 @@ public class BrewBot {
     private void go() throws AWTException, InterruptedException {
 
         Robot robot = new Robot();
-        Scanner scan = new Scanner(System.in);
-        String line = null;
 
-        while((line = scan.nextLine( )).length( ) > 0){
+        while(true){
 
             brewFood(robot);
             watchPaintDry();
