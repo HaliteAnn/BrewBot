@@ -258,7 +258,7 @@ public class BrewBot {
 
     private void brew(Robot robot, int x, int y){
         clickButton(robot, TRANSMUTE_X, TRANSMUTE_Y);
-        robot.delay((int)(Math.random() * 10000) + 1);    // Wait for up to 10 seconds
+        robot.delay((int)(Math.random() * 10000) + 1);       // Wait for up to 10 seconds
         robot.mouseMove(x ,y);                               // Move mouse to desired tab
         click(robot);                                        // Click tab
         clickButton(robot, ITEM_X, ITEM_Y);
@@ -268,13 +268,13 @@ public class BrewBot {
     }
 
     private void clickButton(Robot robot, int x, int y){
-        robot.delay((int)(Math.random() * 6000) + 1);     // Wait for up to 6 seconds
+        robot.delay((int)(Math.random() * 6000) + 1);        // Wait for up to 6 seconds
         robot.mouseMove(x, y);                               // Move mouse to button
         click(robot);                                        // Click
     }
 
     private void click(Robot robot){
-        robot.delay((int)(Math.random() * 4000) + 1);     // Wait for up to 4 seconds
+        robot.delay((int)(Math.random() * 4000) + 1);        // Wait for up to 4 seconds
         robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);      // Press the main mouse button
         robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);    // Release the main mouse button
     }
