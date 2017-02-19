@@ -35,6 +35,8 @@ public class BrewBot {
     private final int ADD_Y;
     private final int CONFIRM_X;
     private final int CONFIRM_Y;
+    private final int COLLECT_X;
+    private final int COLLECT_Y;
 
 
     public BrewBot(){
@@ -77,6 +79,10 @@ public class BrewBot {
         // Set coordinates for confirmation button
         CONFIRM_X = getConfirmX();
         CONFIRM_Y = getConfirmY();
+
+        // Set coordinates for Collect button
+        COLLECT_X = getCollectX();
+        COLLECT_Y = getCollectY();
 
     }
 
@@ -177,6 +183,20 @@ public class BrewBot {
         return 0;
     }
 
+    private int getCollectX(){
+        if(SCREEN_WIDTH == 1920 && SCREEN_HEIGHT == 1080){
+            return 885;
+        }
+        return 0;
+    }
+
+    private int getCollectY(){
+        if(SCREEN_WIDTH == 1920 && SCREEN_HEIGHT == 1080){
+            return 715;
+        }
+        return 0;
+    }
+
     /*
      *  ----------------------------
      *  Action methods
@@ -214,6 +234,7 @@ public class BrewBot {
         clickItem(robot);                                    // No need to select tab, already on food tab
         clickAdd(robot);
         clickConfirm(robot);
+        clickCollect(robot);
     }
 
     private void brew(Robot robot, int x, int y){
@@ -225,6 +246,7 @@ public class BrewBot {
         clickItem(robot);
         clickAdd(robot);
         clickConfirm(robot);
+        clickCollect(robot);
     }
 
     private void clickTransmute(Robot robot){
@@ -251,6 +273,13 @@ public class BrewBot {
     private void clickConfirm(Robot robot){
         robot.delay((int)(Math.random() * 10000) + 1);    // Wait for up to 10 seconds
         robot.mouseMove(CONFIRM_X, CONFIRM_Y);               // Move mouse to Transmute button
+        robot.delay((int)(Math.random() * 10000) + 1);    // Wait for up to 10 seconds
+        click(robot);
+    }
+
+    private void clickCollect(Robot robot){
+        robot.delay((int)(Math.random() * 10000) + 1);    // Wait for up to 10 seconds
+        robot.mouseMove(COLLECT_X, COLLECT_Y);               // Move mouse to Collect button
         robot.delay((int)(Math.random() * 10000) + 1);    // Wait for up to 10 seconds
         click(robot);
     }
